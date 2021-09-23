@@ -7,7 +7,7 @@ ENV container docker
 ENV ARCH "x86_64"
 LABEL architecture="$ARCH" \
       name="gluster/gluster-centos" \
-      version="latest" \
+      version="branch master do github no dia 22/09/2021" \
       vendor="CentOS Community" \
       summary="This image has a running glusterfs service (CentOS 7 + latest Gluster)" \
       io.k8s.display-name="Gluster server based on CentOS 7" \
@@ -40,6 +40,13 @@ yum --setopt=tsflags=nodocs -y install glusterfs-rdma  && \
 yum --setopt=tsflags=nodocs -y install gluster-block  && \
 yum --setopt=tsflags=nodocs -y install glusterfs-geo-replication && yum clean all && \
 sed -i '/Port 22/c\Port 2222' /etc/ssh/sshd_config && \
+echo "#PCI" >> /etc/ssh/sshd_config && \
+echo "Protocol 2" >> /etc/ssh/sshd_config && \
+echo "PermitEmptyPasswords no" >> /etc/ssh/sshd_config && \
+echo "Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr,aes128-gcm@openssh.com,aes128-ctr,aes192-ctr" >> /etc/ssh/sshd_config && \
+echo "KexAlgorithms diffie-hellman-group14-sha1,curve25519-sha256@libssh.org,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512" >> /etc/ssh/sshd_config && \
+echo "HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,rsa-sha2-256,rsa-sha2-256,rsa-sha2-512,ssh-rsa" >> /etc/ssh/sshd_config && \
+echo "MACs hmac-sha2-512,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com" >> /etc/ssh/sshd_config && \
 sed -i 's/Requires\=rpcbind\.service//g' /usr/lib/systemd/system/glusterd.service && \
 sed -i 's/rpcbind\.service/gluster-setup\.service/g' /usr/lib/systemd/system/glusterd.service && \
 sed -i 's/rpcbind\.service//g' /usr/lib/systemd/system/gluster-blockd.service && \
