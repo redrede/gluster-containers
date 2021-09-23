@@ -8,7 +8,7 @@ The support matrix of GlusterFS and container versions:
 
 |                |GlusterFS  Version                    |Container Tag   | Container name                     |
 |----------------|-------------------------------|-----------------------------|------------------|
-|GlusterFS Server Container|`v4.0,  v3.13, v3.12, v3.10`            |`gluster4u0_centos7`,`gluster3u13_centos7`, `gluster3u12_centos7`, `gluster3u10_centos7` |            `gluster-centos`|
+|GlusterFS Server Container|`v4.1.1.7, v4.0,  v3.13, v3.12, v3.10`            |`gluster4u0_centos7`,`gluster3u13_centos7`, `gluster3u12_centos7`, `gluster3u10_centos7` |            `gluster-centos`|
 |GlusterFS Client Container       |`v3.13`            |`latest`            |`glusterfs-client`
 |Gluster S3 Server Container         |`v4.0,  v3.13, v3.12, v3.10`|`latest`|`gluster-s3`
 
@@ -31,6 +31,9 @@ $ docker pull gluster/gluster-fedora
 
 ~~~
 $ docker pull gluster/gluster-centos
+Base CPQD:
+$ docker pull artifactory.cpqd.com.br/docker-dev/cpqd/saf/gluster-centos:v4.1.1.7
+$ docker pull container-registry.cpqd.com.br/pgd-saf//gluster-centos:v4.1.1.7
 ~~~
 
 This will pull the glusterfs docker image from the docker hub.
